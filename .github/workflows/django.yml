@@ -27,7 +27,7 @@ jobs:
           version: 0.6.10
 
       - name: Sync dependencies
-        run: uv pip sync
+        run: uv sync
 
       - name: Run Ruff check
         run: uv run ruff check
