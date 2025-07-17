@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies with uv
         uses: astral-sh/setup-uv@v1
         with:
-          uv-version: 0.6.10
+          version: 0.6.10
 
       - name: Sync dependencies
         run: uv pip sync
