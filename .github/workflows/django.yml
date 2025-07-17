@@ -10,15 +10,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 4
-      python-version: 3.12
+      matrix:
+        python-version: [3.12]  # Corregido
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Install dependencies with uv
         uses: astral-sh/setup-uv@v1
         with:
           uv-version: 0.6.10
-      - run: uv pip sync
-      - run: uv run ruff check
-      - run: uv run ruff format --check
+
+      - name: Sync dependencies
+        run: uv pip sync
+
+      - name: Run Ruff check
+        run: uv run ruff check
+
+      - name: Run Ruff format check
+        run: uv run ruff format --check
